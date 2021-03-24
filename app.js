@@ -1,8 +1,13 @@
 
 const btnAdd = document.querySelector('.btn-add');
 
+const addModal = document.querySelector('.add-modal');
+
 btnAdd.addEventListener('click', () => {
-    console.log('open modal');
+    addModal.classList.add("modal-show");
 });
 
-console.log("Testing Modal Branch");
+window.addEventListener('click', (e) => {
+    if(e.target === addModal)
+    addModal.classList.remove('modal-show');
+});
