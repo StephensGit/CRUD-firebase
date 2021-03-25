@@ -1,7 +1,10 @@
 
-const btnAdd = document.querySelector('.btn-add');
-
+const modalWrapper = document.querySelector('.modal-wrapper');
+// modal add
 const addModal = document.querySelector('.add-modal');
+const addModalForm = document.querySelector('.add-modal .form');
+
+const btnAdd = document.querySelector('.btn-add');
 
 const tableUsers = document.querySelector('.table-users');
 
@@ -36,7 +39,20 @@ window.addEventListener('click', (e) => {
 // Get all the users
 db.collection('users').get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
-        console.log(doc.data);
+        // console.log(doc.data);
         renderUser(doc);
     })
 })
+
+//  Click submit in add modal
+addModalForm.addEventListener('submit', e => {
+    e.preventDefault();
+    db.collection('users').add({
+        firstName: addModalForm.firstName.value,
+        lastName: addModalForm.lastName.value,
+        phone: addModalForm.phone.value,
+        email: addModalForm.email.value,
+    });
+    modalWrapper.classList.remove('modal-show');
+    // console.log(addModalForm.firstName.value);
+});
